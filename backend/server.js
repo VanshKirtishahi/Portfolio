@@ -1,63 +1,75 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./model/User");
+const Contact = require("./model/Contact");
+const cors = require("cors");
+const dotenv = require("dotenv");
 
+
+
+dotenv.config();
 const app = express();
+const PORT = process.env.PORT;
+
+
+// Middleware
+app.use(cors());
+
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}], ${req.method} request made to: ${req.url}`);
+    next();
+})
 
 app.use(express.json());
-
-mongoose.connect("mongodb+srv://vanshkirtishahi_db_user:vor1Txb41iyxIlrK@merncourse.bks0lpk.mongodb.net/?appName=MernCourse").then(() =>{
+mongoose.connect(process.env.MONGO_URI).then(() =>{
     console.log("Database is Connected");
 })
 .catch((err) => {
     console.log(err);
 });
 
-// CRUD Operation
 
 
-// Create Operation
+app.post('/api/contact', async (req, res) => {
+    try{
+        const {name, email, message} = req.body;
 
-app.post('/student', async (req, res) =>{
-    const student = new User(req.body);
-    await student.save();
+        if(!name || !email || !message){
+            return res.status(400).json({error: 'All Fields are requiured.'})
+        }
 
-    res.send("Student Saved")
-});
+        const newMessage = new Contact({name, email, message});
+        await newMessage.save();
 
-// Read Operation 
-
-app.get("/student", async (req, res) => {
-    const students = await User.find();
-    res.json((students));
-});
-
-// Update Operation
-
-app.put("/student/:id", async (req, res) => {
-    await User.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {new : true}
-    );
-
-    res.send("Info Updated !!")
+        res.status(200).json({success: true, message: "Message securly saved to the database !"});
+    }
+    catch (error){
+        console.error('Error saving message:', error);
+        res.status(500).json({error: 'Internal Server Error. Please try again later'});
+    }
 });
 
 
-// Delete Operation
+
+app.get('/api/contact', async (req, res) => {
+    try{
+        const messages = await Contact.find().sort({date : -1});
+        res.status(200).json(messages);
+    }
+    catch (error) {
+        res.status(500).json({error: 'Failed to retrive messages.'})
+    }
+});
 
 
-app.delete("/student/:id", async (req, res) => {
-    await User.findByIdAndDelete(
-        req.params.id,
-    );
+app.get("/test", (req, res) => {
+    res.send("Test Route Working");
+});
 
-    res.send("Info is Deleted");
-})
+app.get("/hello", (req, res) => {
+    res.send("Hello Express");
+});
 
-
-
-app.listen(5000, () => {
-    console.log("Server Running");
+app.listen(PORT, () => {
+    console.log(`Server Running ${PORT}`);
 })

@@ -33,14 +33,31 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (validate()) {
-      setSubmit(true);
-      setFormData({ name: "", email: "", message: "" });
-      setErrors({});
-      setTimeout(() => setSubmit(false), 3000);
+      try {
+        const response = await fetch("http://localhost:9000/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setSubmit(true);
+          setFormData({ name: "", email: "", message: "" });
+          setTimeout(() => setSubmit(false), 3000);
+        } else {
+          setErrors({ api: data.error || 'Something went wrong.' });
+        }
+
+      } catch (err) {
+        setErrors({ api: 'Unable to connect to the server. Is it Running ???' })
+      }
     }
   };
 
@@ -62,11 +79,10 @@ const Contact = () => {
             name="name"
             value={formData?.name}
             onChange={handleChange}
-            className={`w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600 focus:ring-2 ${
-              errors?.name
+            className={`w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600 focus:ring-2 ${errors?.name
                 ? "border-red-500 focus:ring-red-500"
                 : "focus:ring-indigo-500"
-            }`}
+              }`}
           />
           {errors?.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -80,11 +96,10 @@ const Contact = () => {
             name="email"
             value={formData?.email}
             onChange={handleChange}
-            className={`w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600 focus:ring-2 ${
-              errors?.email
+            className={`w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600 focus:ring-2 ${errors?.email
                 ? "border-red-500 focus:ring-red-500"
                 : "focus:ring-indigo-500"
-            }`}
+              }`}
           />
           {errors?.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -98,11 +113,10 @@ const Contact = () => {
             value={formData?.message}
             onChange={handleChange}
             rows="5"
-            className={`w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600 focus:ring-2 ${
-              errors?.message
+            className={`w-full p-3 rounded border dark:bg-gray-700 dark:border-gray-600 focus:ring-2 ${errors?.message
                 ? "border-red-500 focus:ring-red-500"
                 : "focus:ring-indigo-500"
-            }`}
+              }`}
           />
           {errors?.message && (
             <p className="text-red-500 text-sm mt-1">{errors.message}</p>
