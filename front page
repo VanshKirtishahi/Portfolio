@@ -1,81 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio Front Page</title>
-
-<style>
-    body{
-        margin:0;
-        padding:0;
-        font-family:Arial, sans-serif;
-        background:linear-gradient(to right,#4facfe,#00f2fe);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-    }
-
-    .cover{
-        width:500px;
-        padding:40px;
-        background:white;
-        border-radius:15px;
-        text-align:center;
-        box-shadow:0 0 20px rgba(0,0,0,0.3);
-    }
-
-    h1{
-        color:#0d47a1;
-        font-size:42px;
-        margin-bottom:10px;
-    }
-
-    h2{
-        color:#555;
-        margin-bottom:30px;
-    }
-
-    img{
-        width:150px;
-        height:150px;
-        border-radius:50%;
-        border:4px solid #0d47a1;
-    }
-
-    p{
-        font-size:18px;
-        margin:10px 0;
-    }
-
-    .footer{
-        margin-top:30px;
-        color:#777;
-        font-style:italic;
-    }
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Section</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="cover">
+<section id="skills">
+    <h2>My Skills</h2>
 
-    <h1>PORTFOLIO</h1>
-    <h2>Academic Portfolio</h2>
+    <div class="skills-container">
+        <div class="skill-card">
+            <h3>HTML</h3>
+            <div class="bar">
+                <div class="progress html">90%</div>
+            </div>
+        </div>
 
-    <img src="your-photo.jpg" alt="Profile Photo">
+        <div class="skill-card">
+            <h3>CSS</h3>
+            <div class="bar">
+                <div class="progress css">85%</div>
+            </div>
+        </div>
 
-    <p><strong>Name:</strong> Arpita Hatkar</p>
-    <p><strong>Course:</strong> B.Tech</p>
-    <p><strong>Branch:</strong> Computer Engineering</p>
-    <p><strong>College:</strong> Your College Name</p>
+        <div class="skill-card">
+            <h3>JavaScript</h3>
+            <div class="bar">
+                <div class="progress js">75%</div>
+            </div>
+        </div>
 
-    <div class="footer">
-        "Learning Today, Leading Tomorrow"
+        <div class="skill-card">
+            <h3>Python</h3>
+            <div class="bar">
+                <div class="progress python">80%</div>
+            </div>
+        </div>
     </div>
-
-</div>
+</section>
 
 </body>
 </html>
