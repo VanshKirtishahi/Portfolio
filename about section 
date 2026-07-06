@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Section</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="skills">
+    <h2>My Skills</h2>
+
+    <div class="skills-container">
+        <div class="skill-card">
+            <h3>HTML</h3>
+            <div class="bar">
+                <div class="progress html">90%</div>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <h3>CSS</h3>
+            <div class="bar">
+                <div class="progress css">85%</div>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <h3>JavaScript</h3>
+            <div class="bar">
+                <div class="progress js">75%</div>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <h3>Python</h3>
+            <div class="bar">
+                <div class="progress python">80%</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
