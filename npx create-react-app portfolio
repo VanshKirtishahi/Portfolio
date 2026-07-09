@@ -1,0 +1,39 @@
+import React from "react";
+import "./App.css";
+
+function App() {
+  return (
+    <div className="container">
+      <h1>My Portfolio</h1>
+
+      <section>
+        <h2>👨‍💻 About Me</h2>
+        <p>
+          Hello! I am a 1st year BTech CSE student. I am learning programming,
+          web development, and React JS.
+        </p>
+      </section>
+
+      <section>
+        <h2>🚀 My Skills</h2>
+        <ul>
+          <li>Python</li>
+          <li>C Programming</li>
+          <li>HTML & CSS</li>
+          <li>JavaScript (Basics)</li>
+          <li>React JS (Beginner)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>🎯 Goals</h2>
+        <p>
+          My goal is to become a software engineer and crack GATE exam in future.
+        </p>
+      </section>
+
+    </div>
+  );
+}
+
+export default App;
